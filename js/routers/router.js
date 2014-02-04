@@ -1,6 +1,7 @@
 var UndergroundWineRouter = Backbone.Router.extend({
 	routes: {
-    "": "home",    
+    "": "home",
+    "wines": "wines"
   },
   home: function() {
 
@@ -12,5 +13,11 @@ var UndergroundWineRouter = Backbone.Router.extend({
 
 
     console.log('home was hit')
+  },
+  wines: function(){
+    $.ajax({
+      type: "GET",
+      url: "http://services.wine.com/api/beta2/service.svc/JSON/catalog?apikey=d5791d1238c1625fd2807acdf352be2a&size=25&offset=10&filter=categories(7155+124)term=mondavi+cab"
+    }).done(function(res){ parsewines(res) })
   }
 })
